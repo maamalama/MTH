@@ -13,6 +13,7 @@ class App extends Component {
 		activeView: "admin"
 	}
 
+
 	render() {
 		const { activePanel, activeView } = this.state;
 		return(

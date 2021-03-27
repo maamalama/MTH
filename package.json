@@ -24,6 +24,7 @@
     "@vkontakte/vk-miniapps-deploy": "0.0.17",
     "@vkontakte/vkjs": "^0.21.0",
     "@vkontakte/vkui": "^4.3.0",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "chalk": "^2.4.2",
     "eruda": "^2.4.1",
