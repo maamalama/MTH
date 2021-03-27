@@ -3,3 +3,16 @@
     height: 256px;
     margin: 50px auto;
 }
+
+.question {
+
+}
+
+.question__content {
+    display: flex;
+    padding: 20px 15px;
+}
+
+.question__content-index {
+    font-weight: 700;
+}
