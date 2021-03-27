@@ -9,7 +9,7 @@ class App extends Component {
 	state = {
 		popout: null, 
 		snackbar: null,
-		activePanel: "admin",
+		activePanel: "create_user",
 		activeView: "admin"
 	}
 
@@ -19,9 +19,9 @@ class App extends Component {
 			<ConfigProvider>
 				<AdaptivityProvider>
 					<AppRoot>
-						<Root activeView="admin">
-							<View id="admin" activePanel="main">
-								<Panel id="main">
+						<Root activeView={activeView}>
+							<View id="admin" activePanel={activePanel}>
+								<Panel id="create_user">
 									<PanelHeader>
 										Админ
 									</PanelHeader>
