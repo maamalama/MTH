@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import bridge from '@vkontakte/vk-bridge';
 import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect } from '@vkontakte/vkui';
+import { io } from "socket.io-client"
 import '@vkontakte/vkui/dist/vkui.css';
 import './css/style.css';
 import vkQr from '@vkontakte/vk-qr';
@@ -22,13 +22,48 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		if(window.location.hash === "#admin") {
+			console.log("data");
+		} else {
+			const socket = io("wss://195.161.62.85:3000" , { transports: ["websocket"], autoConnect: false } );
+			socket.open();
+			this.setState({ socket });
+			this.getGeolcation();
+		}
+		
+		
+	}
+
+	getGeolcation = () => {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.watchPosition((position) => {
 				console.log(position)
+				this.state.socket.emit("geo", { user_id: 1, coords: position.coords });
+			}, (err) => {
+				this.getGeolcation();
+				this.setPopout(
+					<Alert
+						header="Вы запретили геолокацию"
+						text="Для нормальной работы сервиса разрешите геолокацию"
+						onClose={() => this.setPopout(null)}
+					>
+	
+					</Alert>)
 			});
-		} else {
-			/* местоположение НЕ доступно */
-		}
+		  } else {
+			this.setPopout(
+				<Alert
+					header="выоваырлоафылалрфыв"
+					text="Для нормальной работы сервиса разрешите геолокацию"
+					onClose={() => this.setPopout(null)}
+				>
+
+				</Alert>)
+		  }
+	}
+
+	setPopout = (popout) => {
+		this.setState({ popout });
 	}
 
 	createQR = () => {
@@ -52,13 +87,13 @@ class App extends Component {
 
 
 	render() {
-		const { activePanel, activeView, user } = this.state;
-		return (
+		const { activePanel, activeView, user, poput } = this.state;
+		return(
 			<ConfigProvider>
 				<AdaptivityProvider>
 					<AppRoot>
 						<Root activeView={activeView}>
-							<View id="admin" activePanel={activePanel}>
+							<View id="admin" activePanel={activePanel} popout={popout}>
 								<Panel id="create_user">
 									<PanelHeader>
 										Админ
