@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group } from '@vkontakte/vkui';
+import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group, Alert } from '@vkontakte/vkui';
 import { io } from "socket.io-client"
 import '@vkontakte/vkui/dist/vkui.css';
 import './css/style.css';
@@ -12,8 +12,10 @@ class App extends Component {
 	state = {
 		popout: null,
 		snackbar: null,
-		activePanel: "main",
+		activePanelAdmin: "create_user",
+		activePanelUser: "main",
 		activeView: "user",
+		user_id: null,
 		user: {
 			name: null,
 			sex: null,
@@ -28,11 +30,10 @@ class App extends Component {
 
 	componentDidMount() {
 		if (window.location.hash === "#admin") {
-			console.log("data");
+			this.setState({ activeView: "admin", activePanelAdmin: "create_user" })
+
 		} else {
-			const socket = io("wss://195.161.62.85:3000", { transports: ["websocket"], autoConnect: false });
-			socket.open();
-			this.setState({ socket });
+			this.setState({ user_id: window.location.hash.split("user")[1] })
 			this.getGeolcation();
 		}
 
@@ -43,7 +44,7 @@ class App extends Component {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.watchPosition((position) => {
 				console.log(position)
-				this.state.socket.emit("geo", { user_id: 1, coords: position.coords });
+				send("geo", { user_id: this.state.user_id, coords: position.coords });
 			}, (err) => {
 				this.getGeolcation();
 				this.setPopout(
@@ -73,7 +74,7 @@ class App extends Component {
 
 	createQR = () => {
 		send("user", this.state.user).then(data => {
-			const qrSvg = vkQr.createQR("https://localhost:10888/#user" + data.user_id, {
+			const qrSvg = vkQr.createQR("https://user267319094-r7wx5wi4.wormhole.vk-apps.com/#user" + data.user_id, {
 				qrSize: 256,
 				isShowLogo: false,
 				className: "QR-container__qr-code"
@@ -92,13 +93,13 @@ class App extends Component {
 
 
 	render() {
-		const { activePanel, activeView, user, popout } = this.state;
+		const { activePanelAdmin, activePanelUser, activeView, user, popout } = this.state;
 		return(
 			<ConfigProvider>
 				<AdaptivityProvider>
 					<AppRoot>
 						<Root activeView={activeView}>
-							<View id="admin">
+							<View id="admin" activePanel={activePanelAdmin}>
 								<Panel id="create_user">
 									<PanelHeader>
 										Админ
@@ -113,7 +114,7 @@ class App extends Component {
 												<Input name="sex" onChange={this.onChange} value={user.sex} type="text" />
 											</FormItem>
 											<FormItem top="Возраст">
-												<Input name="age" onChange={this.onChange} value={user.age} type="number" />
+												<Input name="age" onChange={this.onChange} value={user.age} type="text" />
 											</FormItem>
 											<FormItem>
 												<Button onClick={() => this.createQR()} size="l" mode="commerce" stretched >QR-код</Button>
@@ -124,7 +125,7 @@ class App extends Component {
 								</Panel>
 							</View>
 
-							<View id="user" activePanel={activePanel}>
+							<View id="user" activePanel={activePanelUser}>
 								<Panel id="main">
 									<PanelHeader>
 										Вопросы
@@ -137,7 +138,7 @@ class App extends Component {
 														<Card className="question">
 															<div className="question__content">
 																<span className="question__content-index">{`${index +1 } `}</span>
-																<div class="question__content-text">{el}</div>
+																<div className="question__content-text">{el}</div>
 															</div>
 														</Card>
 													);
