@@ -22,15 +22,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-
-
         return [
             'name' => $this->faker->name,
             'lat' => $this->faker->latitude(50,51),
             'lon' => $this->faker->longitude(50,51),
             'sex' => $this->faker->randomElement(['мужской', 'женский', 'другое']),
             'date_birth' => $this->faker->date,
-            'created_at' => $this->faker->date('Y-m-d'),
+            'created_at' => $this->faker->dateTimeThisYear('+9 months'),
         ];
     }
 }

@@ -23,8 +23,10 @@ class UsersSeeder extends Seeder
         
         $count_date = count($full_date) - 1;
 
-        User::factory(1000)->create([
-            'comment' => $full_date[rand(0, $count_date)]
-        ]);
+        for ($i=0; $i < 1000; $i++) { 
+            User::factory(1)->create([
+                'comment' => $full_date[rand(0, $count_date)]
+            ]);
+        }
     }
 }

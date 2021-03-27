@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('lat', 16,8);
-            $table->float('lon', 16,8);
+            $table->float('lat', 16,8)->nullable();
+            $table->float('lon', 16,8)->nullable();
             $table->string('sex');
             $table->date('date_birth');
-            $table->string('comment');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

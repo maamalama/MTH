@@ -12,4 +12,9 @@ class Answers extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function questionsAnswer()
+    {
+        return $this->hasMany(QuestionsAnswers::class);
+    }
 }

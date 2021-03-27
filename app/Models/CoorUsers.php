@@ -13,5 +13,11 @@ class CoorUsers extends Model
         'lat',
         'lon',
         'user_id',
+        'number'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

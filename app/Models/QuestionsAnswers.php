@@ -13,4 +13,14 @@ class QuestionsAnswers extends Model
         'question_id',
         'answer_id',
     ];
+
+    public function answer()
+    {
+        return $this->belongsTo(Answers::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Questions::class);
+    }
 }

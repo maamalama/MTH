@@ -25,4 +25,14 @@ class User extends Authenticatable
         'created_at',
         'comment'
     ];
+
+    public function coorUsers()
+    {
+        return $this->hasMany(CoorUsers::class);
+    }
+
+    public function questionsAnswersUsers()
+    {
+        return $this->hasMany(QuestionsAnswersUser::class);
+    }
 }

@@ -17,6 +17,7 @@ class CreatecoorUsersTable extends Migration
             $table->id();
             $table->float('lat', 16,8);
             $table->float('lon', 16,8);
+            $table->string('number')->nullable();
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE');

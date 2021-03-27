@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('user', [UserController::class, 'newUser']);
 Route::get('user', [UserController::class, 'getUsers']);
+Route::put('user/{user}', [UserController::class, 'updateUser']);
