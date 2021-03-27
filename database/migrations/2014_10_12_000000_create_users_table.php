@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->float('lon', 16,8);
             $table->string('sex');
             $table->date('date_birth');
+            $table->string('comment');
             $table->timestamps();
         });
     }
