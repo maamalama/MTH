@@ -23,7 +23,8 @@ class User extends Authenticatable
         'sex',
         'date_birth',
         'created_at',
-        'comment'
+        'comment',
+        'comment_positively'
     ];
 
     public function coorUsers()

@@ -17,6 +17,7 @@ class UsersSeeder extends Seeder
         if (($handle = fopen(public_path().'/comment/comments.csv', 'r')) !== FALSE) {
             while (($data = fgetcsv($handle)) !== FALSE) {
                 $full_date[] =$data[0];
+                $full_date2[] =$data[1];
             }
             fclose($handle);
         }
@@ -25,7 +26,8 @@ class UsersSeeder extends Seeder
 
         for ($i=0; $i < 1000; $i++) { 
             User::factory(1)->create([
-                'comment' => $full_date[rand(0, $count_date)]
+                'comment' => $full_date[rand(0, $count_date)],
+                'comment_positively' => (int) $full_date2[rand(0, $count_date)]
             ]);
         }
     }

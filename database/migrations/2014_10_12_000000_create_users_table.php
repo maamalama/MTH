@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->float('lon', 16,8)->nullable();
             $table->string('sex');
             $table->date('date_birth');
+            $table->boolean('comment_positively')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
         });
