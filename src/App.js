@@ -10,7 +10,19 @@ class App extends Component {
 		popout: null, 
 		snackbar: null,
 		activePanel: "create_user",
-		activeView: "admin"
+		activeView: "admin",
+		user: {
+			name: null,
+			sex: null,
+			age: null
+		}
+	}
+
+	createQR = () => {
+
+		console.log(this.state.user);
+
+
 	}
 
 	render() {
@@ -37,7 +49,7 @@ class App extends Component {
 													<Input name="age" type="text" />
 												</FormItem>
 												<FormItem>
-													<Button size="l" mode="commerce" stretched >QR код</Button>
+													<Button onClick={this.createQR}  size="l" mode="commerce" stretched >QR код</Button>
 												</FormItem>
 											</FormLayoutGroup>
 										</FormLayout>
