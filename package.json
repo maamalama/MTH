@@ -18,6 +18,7 @@
     "react-scripts": "^4.0.3"
   },
   "dependencies": {
+    "@unexp/router": "0.0.29",
     "@vkontakte/icons": "^1.88.0",
     "@vkontakte/vk-bridge": "^2.4.1",
     "@vkontakte/vk-miniapps-deploy": "0.0.17",
@@ -30,6 +31,20 @@
     "eruda-dom": "^2.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "react-redux": "^7.2.3",
+    "redux": "^4.0.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
