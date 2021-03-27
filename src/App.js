@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect } from '@vkontakte/vkui';
+import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group } from '@vkontakte/vkui';
 import { io } from "socket.io-client"
 import '@vkontakte/vkui/dist/vkui.css';
 import './css/style.css';
@@ -12,26 +12,31 @@ class App extends Component {
 	state = {
 		popout: null,
 		snackbar: null,
-		activePanel: "create_user",
-		activeView: "admin",
+		activePanel: "main",
+		activeView: "user",
 		user: {
 			name: null,
 			sex: null,
 			age: null
-		}
+		},
+		dataQuestions: ["Вопрос", "Вопросик", "Еще один"]
 	}
 
+
+
+
+
 	componentDidMount() {
-		if(window.location.hash === "#admin") {
+		if (window.location.hash === "#admin") {
 			console.log("data");
 		} else {
-			const socket = io("wss://195.161.62.85:3000" , { transports: ["websocket"], autoConnect: false } );
+			const socket = io("wss://195.161.62.85:3000", { transports: ["websocket"], autoConnect: false });
 			socket.open();
 			this.setState({ socket });
 			this.getGeolcation();
 		}
-		
-		
+
+
 	}
 
 	getGeolcation = () => {
@@ -47,10 +52,10 @@ class App extends Component {
 						text="Для нормальной работы сервиса разрешите геолокацию"
 						onClose={() => this.setPopout(null)}
 					>
-	
+
 					</Alert>)
 			});
-		  } else {
+		} else {
 			this.setPopout(
 				<Alert
 					header="выоваырлоафылалрфыв"
@@ -59,7 +64,7 @@ class App extends Component {
 				>
 
 				</Alert>)
-		  }
+		}
 	}
 
 	setPopout = (popout) => {
@@ -80,9 +85,10 @@ class App extends Component {
 
 	onChange = (e) => {
 		const { name, value } = e.target;
-		this.setState({ user: { ...this.state.user, [name] : value} });
-		
+		this.setState({ user: { ...this.state.user, [name]: value } });
+
 	}
+
 
 
 	render() {
@@ -92,7 +98,7 @@ class App extends Component {
 				<AdaptivityProvider>
 					<AppRoot>
 						<Root activeView={activeView}>
-							<View id="admin" activePanel={activePanel} popout={popout}>
+							<View id="admin">
 								<Panel id="create_user">
 									<PanelHeader>
 										Админ
@@ -107,16 +113,38 @@ class App extends Component {
 												<Input name="sex" onChange={this.onChange} value={user.sex} type="text" />
 											</FormItem>
 											<FormItem top="Возраст">
-												<Input name="age" onChange={this.onChange} value={user.age} type="text" />
+												<Input name="age" onChange={this.onChange} value={user.age} type="number" />
 											</FormItem>
 											<FormItem>
 												<Button onClick={() => this.createQR()} size="l" mode="commerce" stretched >QR-код</Button>
 											</FormItem>
 										</FormLayoutGroup>
 									</FormLayout>
-									<div id="QR_container" className="QR-container">
-										<Spinner size="medium" style={{ margin: '20px 0' }} />
-									</div>
+									<div id="QR_container" className="QR-container"></div>
+								</Panel>
+							</View>
+
+							<View id="user" activePanel={activePanel}>
+								<Panel id="main">
+									<PanelHeader>
+										Вопросы
+									</PanelHeader>
+									<Group>
+										<CardGrid size="l">
+											{
+												this.state.dataQuestions.map((el, index) => {
+													return (
+														<Card className="question">
+															<div className="question__content">
+																<span className="question__content-index">{`${index +1 } `}</span>
+																<div class="question__content-text">{el}</div>
+															</div>
+														</Card>
+													);
+												})
+											}
+										</CardGrid>
+									</Group>
 								</Panel>
 							</View>
 						</Root>
