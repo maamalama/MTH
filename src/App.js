@@ -33,6 +33,7 @@ class App extends Component {
 
 	createQR = () => {
 		let user_id = 0;
+
 		send("user", this.state.user).then(data => {
 			const qrSvg = vkQr.createQR("data.user_id", {
 				qrSize: 256,
@@ -80,9 +81,7 @@ class App extends Component {
 											</FormItem>
 										</FormLayoutGroup>
 									</FormLayout>
-									<div id="QR_container" className="QR-container">
-										<Spinner size="medium" style={{ margin: '20px 0' }} />
-									</div>
+									<div id="QR_container" className="QR-container"></div>
 								</Panel>
 							</View>
 						</Root>
