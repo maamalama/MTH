@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
+import './css/style.css';
 import vkQr from '@vkontakte/vk-qr';
+import { send } from './server_api';
 
 
 class App extends Component {
@@ -20,11 +22,13 @@ class App extends Component {
 	}
 
 	createQR = () => {
-		const qrSvg = vkQr.createQR('Test', {
+		let user_id = 0;
+		const qrSvg = vkQr.createQR("user_id", {
 			qrSize: 256,
-			isShowLogo: true
+			isShowLogo: false,
+			className: "QR-container__qr-code"
 		  });
-		console.log(this.state.user);
+			document.querySelector("#QR_container").innerHTML = qrSvg;
 	}
 
 
@@ -52,10 +56,13 @@ class App extends Component {
 													<Input name="age" type="text" />
 												</FormItem>
 												<FormItem>
-													<Button onClick={this.createQR}  size="l" mode="commerce" stretched >QR код</Button>
+													<Button onClick={this.createQR}  size="l" mode="commerce" stretched >QR-код</Button>
 												</FormItem>
 											</FormLayoutGroup>
 										</FormLayout>
+										<div id="QR_container" class="QR-container">
+
+										</div>
 								</Panel>	
 							</View>
 						</Root>

@@ -22,6 +22,7 @@
     "@vkontakte/icons": "^1.88.0",
     "@vkontakte/vk-bridge": "^2.4.1",
     "@vkontakte/vk-miniapps-deploy": "0.0.17",
+    "@vkontakte/vk-qr": "^2.0.10",
     "@vkontakte/vkjs": "^0.21.0",
     "@vkontakte/vkui": "^4.3.0",
     "axios": "^0.21.1",
