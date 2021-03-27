@@ -17,15 +17,15 @@ class QuestionsSeeder extends Seeder
     public function run()
     {
         $question = Questions::create([
-            'name' => 'Вы первый раз в гараже'
+            'name' => 'Вы первый раз в гараже?'
         ]);
 
         $answers[1][0] = Answers::create([
-            'Нет'
+            'name' => 'Нет'
         ]);
         
         $answers[1][1] = Answers::create([
-            'Да'
+            'name' => 'Да'
         ]);
 
         foreach ($answers[1] as $value) {
@@ -40,15 +40,15 @@ class QuestionsSeeder extends Seeder
         ]);
 
         $answers[0][0] = Answers::create([
-            '1'
+            'name' => '1'
         ]);
         
         $answers[0][1] = Answers::create([
-            '2'
+            'name' => '2'
         ]);
         
         $answers[0][2] = Answers::create([
-            '3'
+            'name' => '3'
         ]);
 
         foreach ($answers[0] as $value) {
@@ -63,18 +63,75 @@ class QuestionsSeeder extends Seeder
         ]);
 
         $answers[2][0] = Answers::create([
-            '1'
+            'name' => '1'
         ]);
         
         $answers[2][1] = Answers::create([
-            '2'
+            'name' => '2'
         ]);
         
         $answers[2][2] = Answers::create([
-            '3'
+            'name' => '3'
         ]);
 
         foreach ($answers[0] as $value) {
+            QuestionsAnswers::create([
+                'question_id' => $question->id,
+                'answer_id' => $value->id
+            ]);
+        }
+
+        $question = Questions::create([
+            'name' => 'Уютно ли вам у нас?'
+        ]);
+
+        $answers[3][0] = Answers::create([
+            'name' => 'Да'
+        ]);
+        
+        $answers[3][1] = Answers::create([
+            'name' => 'Нет'
+        ]);
+
+        foreach ($answers[3] as $value) {
+            QuestionsAnswers::create([
+                'question_id' => $question->id,
+                'answer_id' => $value->id
+            ]);
+        }
+
+        $question = Questions::create([
+            'name' => 'Как вы думаете Пикассо оценил бы эту комнату?'
+        ]);
+
+        $answers[4][0] = Answers::create([
+            'name' => 'Да'
+        ]);
+        
+        $answers[4][1] = Answers::create([
+            'name' => 'Нет'
+        ]);
+
+        foreach ($answers[4] as $value) {
+            QuestionsAnswers::create([
+                'question_id' => $question->id,
+                'answer_id' => $value->id
+            ]);
+        }
+
+        $question = Questions::create([
+            'name' => 'В каком веке была нарисована картина №2?'
+        ]);
+
+        $answers[5][0] = Answers::create([
+            'name' => '15'
+        ]);
+        
+        $answers[5][1] = Answers::create([
+            'name' => '19'
+        ]);
+
+        foreach ($answers[5] as $value) {
             QuestionsAnswers::create([
                 'question_id' => $question->id,
                 'answer_id' => $value->id

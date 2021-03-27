@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,5 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('user', [UserController::class, 'newUser']);
+Route::post('answer-user', [QuestionsAnswersUserController::class, 'create']);
 Route::get('user', [UserController::class, 'getUsers']);
+Route::get('quest/{user}', [QuestionsController::class, 'getQuestions']);
 Route::put('user/{user}', [UserController::class, 'updateUser']);
+Route::get('test', [UserController::class, 'test']);
