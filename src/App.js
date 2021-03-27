@@ -67,9 +67,8 @@ class App extends Component {
 	}
 
 	createQR = () => {
-		let user_id = 0;
 		send("user", this.state.user).then(data => {
-			const qrSvg = vkQr.createQR("data.user_id", {
+			const qrSvg = vkQr.createQR("https://localhost:10888/#user" + data.user_id, {
 				qrSize: 256,
 				isShowLogo: false,
 				className: "QR-container__qr-code"
@@ -87,7 +86,7 @@ class App extends Component {
 
 
 	render() {
-		const { activePanel, activeView, user, poput } = this.state;
+		const { activePanel, activeView, user, popout } = this.state;
 		return(
 			<ConfigProvider>
 				<AdaptivityProvider>

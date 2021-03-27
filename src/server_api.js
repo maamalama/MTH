@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = "https://back.com.xsph.ru/api/";
+const URL = "https://195.161.62.85:3000/";
 
 export function send(method, obj) {
     const a = new Promise((resolve, reject) => {
