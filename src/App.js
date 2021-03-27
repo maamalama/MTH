@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
+import vkQr from '@vkontakte/vk-qr';
 
 
 class App extends Component {
@@ -19,10 +20,11 @@ class App extends Component {
 	}
 
 	createQR = () => {
-
+		const qrSvg = vkQr.createQR('Test', {
+			qrSize: 256,
+			isShowLogo: true
+		  });
 		console.log(this.state.user);
-
-
 	}
 
 	render() {
