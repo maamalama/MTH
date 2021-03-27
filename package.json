@@ -7,7 +7,7 @@
     "start": "cross-env PORT=10888 HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "vk-miniapps-deploy"
+    "deploy": "surge ./build --domain=https://best11-mice.surge.sh"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +36,7 @@
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.3",
     "redux": "^4.0.5",
+    "socket.io-client": "^4.0.0",
     "surge": "^0.22.1"
   },
   "browserslist": {
