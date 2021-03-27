@@ -1,18 +1,17 @@
 .QR-container {
-    width: 256px;
-    height: 256px;
-    margin: 50px auto;
+  width: 256px;
+  height: 256px;
+  margin: 50px auto;
 }
-
-.question {
-
-}
-
 .question__content {
-    display: flex;
-    padding: 20px 15px;
+  display: flex;
+  padding: 20px 15px;
 }
 
 .question__content-index {
-    font-weight: 700;
+  font-weight: 700;
+}
+
+.sex-select {
+  width: 100%;
 }

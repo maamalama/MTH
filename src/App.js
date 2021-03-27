@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group } from '@vkontakte/vkui';
+import { Alert, AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group, Cell, Radio, ModalPage, ModalRoot, ModalPageHeader } from '@vkontakte/vkui';
 import { io } from "socket.io-client"
 import '@vkontakte/vkui/dist/vkui.css';
 import './css/style.css';
@@ -7,11 +7,20 @@ import vkQr from '@vkontakte/vk-qr';
 import { send } from './server_api';
 
 
-class App extends Component {
+if("serviceWorker" in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+	.then((reg) => {
+		console.log("success " + requestAnimationFrame.scope);
+	}).catch((error) => {
+		console.log("Error " + error);
+	});
+}
 
+class App extends Component {
 	state = {
 		popout: null,
 		snackbar: null,
+		answers: null,
 		activePanel: "main",
 		activeView: "user",
 		user: {
@@ -19,9 +28,29 @@ class App extends Component {
 			sex: null,
 			age: null
 		},
-		dataQuestions: ["Вопрос", "Вопросик", "Еще один"]
+		dataQuestions: [
+			{
+				text: "Как вам выставка?",
+				id: "1",
+				answers: ["ужасно 👎", "нормально 😐", "отлично 👍"]
+			},
+			{
+				text: "Самый любимый экспонат",
+				id: "2",
+				answers: ["никакой", "который план эвакуации", "золотой стул"]
+			},
+			{
+				text: "Придете еще?",
+				id: "3", 
+				answers: ["нет 🤢", "может быть 🤔", "да! 😊"]
+			}
+
+		]
 	}
 
+	setActiveModal = (activeModal) => {
+		this.setState({ activeModal })
+	}
 
 
 
@@ -86,19 +115,40 @@ class App extends Component {
 	onChange = (e) => {
 		const { name, value } = e.target;
 		this.setState({ user: { ...this.state.user, [name]: value } });
-
 	}
 
 
+	showQuestion = (answers) => {
+		this.setActiveModal("questions");
+		this.setState({ answers })
+	}
 
+	
 	render() {
-		const { activePanel, activeView, user, popout } = this.state;
-		return(
+		const { activePanel, activeView, user, popout, activeModal, answers } = this.state;
+		return (
 			<ConfigProvider>
 				<AdaptivityProvider>
 					<AppRoot>
-						<Root activeView={activeView}>
-							<View id="admin">
+						<Root activeView={activeView} modal={
+							<ModalRoot activeModal={activeModal}>
+								<ModalPage id="questions" header={<ModalPageHeader>Вопросы</ModalPageHeader>} onClose={() => this.setState({ activeModal: null })}>
+									{answers &&
+										<div>
+											{
+												answers.map((el, index) => {
+													return (
+														<Radio name="answer">{el}</Radio>
+													)
+
+												})
+											}
+										</div>
+									}
+								</ModalPage>
+							</ModalRoot>
+						}>
+							<View activePanel={activePanel} id="admin">
 								<Panel id="create_user">
 									<PanelHeader>
 										Админ
@@ -106,14 +156,16 @@ class App extends Component {
 									<FormLayout>
 										<FormLayoutGroup>
 											<FormItem top="ФИО">
-												<Input name="name" onChange={this.onChange} value={user.name} type="text" />
+												<Input name="name" onChange={this.onChange} value={user.name} type="text" required />
+
 											</FormItem>
 											<FormItem top="Пол">
-												<CustomSelect placeholder="Не выбрано"></CustomSelect>
-												<Input name="sex" onChange={this.onChange} value={user.sex} type="text" />
+												<Radio name="sex" value="женский" onChange={this.onChange}>Мужской</Radio>
+												<Radio name="sex" value="мужской" onChange={this.onChange}>Женский</Radio>
+												<Radio name="sex" value="другой" onChange={this.onChange}>Другой</Radio>
 											</FormItem>
-											<FormItem top="Возраст">
-												<Input name="age" onChange={this.onChange} value={user.age} type="number" />
+											<FormItem top="Дата рождения">
+												<Input name="age" onChange={this.onChange} value={user.age} type="date" />
 											</FormItem>
 											<FormItem>
 												<Button onClick={() => this.createQR()} size="l" mode="commerce" stretched >QR-код</Button>
@@ -134,10 +186,10 @@ class App extends Component {
 											{
 												this.state.dataQuestions.map((el, index) => {
 													return (
-														<Card className="question">
+														<Card id={el.id} onClick={() => this.showQuestion(el.answers)} className="question">
 															<div className="question__content">
-																<span className="question__content-index">{`${index +1 } `}</span>
-																<div class="question__content-text">{el}</div>
+																<span className="question__content-index">{`${index + 1} `}</span>
+																<div class="question__content-text">{el.text}</div>
 															</div>
 														</Card>
 													);
