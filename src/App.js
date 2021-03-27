@@ -19,6 +19,16 @@ class App extends Component {
 		}
 	}
 
+	componentDidMount() {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.watchPosition((position) => {
+				console.log(position)
+			});
+		  } else {
+			/* местоположение НЕ доступно */
+		  }
+	}
+
 	createQR = () => {
 		const qrSvg = vkQr.createQR('Test', {
 			qrSize: 256,
