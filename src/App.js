@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel } from '@vkontakte/vkui';
+import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
-
 
 
 class App extends Component {
@@ -10,8 +9,8 @@ class App extends Component {
 	state = {
 		popout: null, 
 		snackbar: null,
-		activePanel: "main",
-		activeView: "main"
+		activePanel: "admin",
+		activeView: "admin"
 	}
 
 	render() {
@@ -20,10 +19,28 @@ class App extends Component {
 			<ConfigProvider>
 				<AdaptivityProvider>
 					<AppRoot>
-						<Root activeView={activeView} modal={null}>
-							<View id="main" activePanel={activePanel}>
+						<Root activeView="admin">
+							<View id="admin" activePanel="main">
 								<Panel id="main">
-									<PanelHeader>Чат</PanelHeader>
+									<PanelHeader>
+										Админ
+									</PanelHeader>
+										<FormLayout>
+											<FormLayoutGroup>
+												<FormItem top="ФИО">
+													<Input name="name" type="text" />
+												</FormItem>
+												<FormItem top="Пол">
+													<Input name="sex" type="text" />
+												</FormItem>
+												<FormItem top="Возраст">
+													<Input name="age" type="text" />
+												</FormItem>
+												<FormItem>
+													<Button size="l" mode="commerce" stretched >QR код</Button>
+												</FormItem>
+											</FormLayoutGroup>
+										</FormLayout>
 								</Panel>	
 							</View>
 						</Root>
