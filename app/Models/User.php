@@ -22,5 +22,6 @@ class User extends Authenticatable
         'lon',
         'sex',
         'date_birth',
+        'created_at'
     ];
 }
