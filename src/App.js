@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import { AdaptivityProvider, AppRoot, ConfigProvider, Root } from '@vkontakte/vkui';
+import { AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
-import Home from './panels/Home';
-import Persik from './panels/Persik';
-import { Epic } from '@vkontakte/vkui/dist/components/Epic/Epic';
-import { useStructure } from '@unexp/router';
+
 
 class App extends Component {
 
+	state = {
+		popout: null, 
+		snackbar: null,
+		activePanel: "main",
+		activeView: "main"
+	}
+
 	render() {
-		const structure = useStructure({ view: 'home', panel: 'main' });
+		const { activePanel, activeView } = this.state;
 		return(
 			<ConfigProvider>
 				<AdaptivityProvider>
 					<AppRoot>
-						<Root popout={structure.popout} modal={null}>
-							<Epic activeStory={structure.view}>
-								
-							</Epic>
+						<Root activeView={activeView} modal={null}>
+							<View id="main" activePanel={activePanel}>
+								<Panel id="main">
+									<PanelHeader>Чат</PanelHeader>
+								</Panel>	
+							</View>
 						</Root>
 					</AppRoot>
 				</AdaptivityProvider>
