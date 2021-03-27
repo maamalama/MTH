@@ -23,6 +23,7 @@ class App extends Component {
 		answers: null,
 		activePanel: "main",
 		activeView: "user",
+		user_id: null,
 		user: {
 			name: null,
 			sex: null,
@@ -57,11 +58,10 @@ class App extends Component {
 
 	componentDidMount() {
 		if (window.location.hash === "#admin") {
-			console.log("data");
+			this.setState({ activeView: "admin", activePanelAdmin: "create_user" })
+
 		} else {
-			const socket = io("wss://195.161.62.85:3000", { transports: ["websocket"], autoConnect: false });
-			socket.open();
-			this.setState({ socket });
+			this.setState({ user_id: window.location.hash.split("user")[1] })
 			this.getGeolcation();
 		}
 
@@ -72,7 +72,7 @@ class App extends Component {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.watchPosition((position) => {
 				console.log(position)
-				this.state.socket.emit("geo", { user_id: 1, coords: position.coords });
+				send("geo", { user_id: this.state.user_id, coords: position.coords });
 			}, (err) => {
 				this.getGeolcation();
 				this.setPopout(
@@ -102,7 +102,7 @@ class App extends Component {
 
 	createQR = () => {
 		send("user", this.state.user).then(data => {
-			const qrSvg = vkQr.createQR("https://localhost:10888/#user" + data.user_id, {
+			const qrSvg = vkQr.createQR("https://user267319094-r7wx5wi4.wormhole.vk-apps.com/#user" + data.user_id, {
 				qrSize: 256,
 				isShowLogo: false,
 				className: "QR-container__qr-code"
@@ -164,6 +164,7 @@ class App extends Component {
 												<Radio name="sex" value="мужской" onChange={this.onChange}>Женский</Radio>
 												<Radio name="sex" value="другой" onChange={this.onChange}>Другой</Radio>
 											</FormItem>
+
 											<FormItem top="Дата рождения">
 												<Input name="age" onChange={this.onChange} value={user.age} type="date" />
 											</FormItem>
@@ -176,7 +177,7 @@ class App extends Component {
 								</Panel>
 							</View>
 
-							<View id="user" activePanel={activePanel}>
+							<View id="user" activePanel={activePanelUser}>
 								<Panel id="main">
 									<PanelHeader>
 										Вопросы
