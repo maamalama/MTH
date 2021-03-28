@@ -40,14 +40,14 @@ class UserController extends Controller
     {
         $respone = Http::get('http://a3431-9a0c2.s2.deploy-f.com/api/analysis/getuseranalysis',[
             'comment' => $request->comment
-        ])->json()['result'];
+        ])->json();
 
         User::fing($request->user_id)->update([
             'comment' => $request->comment,
-            'comment_positively' => $respone
+            'comment_positively' => $respone['result']
         ]);
 
-        return response()->json();
+        return response()->json([$respone]);
     }
 
     public function test()
