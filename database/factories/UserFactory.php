@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'lon' => $this->faker->longitude(50,51),
             'sex' => $this->faker->randomElement(['мужской', 'женский', 'другое']),
             'date_birth' => $this->faker->date,
-            'created_at' => $this->faker->dateTimeThisDecade('-1 years'),
+            'created_at' => $this->faker->dateTimeThisDecade('1 years'),
         ];
     }
 }
