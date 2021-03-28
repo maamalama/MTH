@@ -1,0 +1,12 @@
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\bin\Debug\net5.0\MTHAnalysis.Shared.deps.json
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\bin\Debug\net5.0\MTHAnalysis.Shared.dll
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\bin\Debug\net5.0\ref\MTHAnalysis.Shared.dll
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\bin\Debug\net5.0\MTHAnalysis.Shared.pdb
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\MTHAnalysis.Shared.csprojAssemblyReference.cache
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\MTHAnalysis.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\MTHAnalysis.Shared.AssemblyInfoInputs.cache
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\MTHAnalysis.Shared.AssemblyInfo.cs
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\MTHAnalysis.Shared.csproj.CoreCompileInputs.cache
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\MTHAnalysis.Shared.dll
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\ref\MTHAnalysis.Shared.dll
+D:\MTH\analysis\MTHAnalysis\MTHAnalysis\Shared\obj\Debug\net5.0\MTHAnalysis.Shared.pdb
