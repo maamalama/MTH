@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
-    public function getQuestions(User $user)
+    public function getQuestions()
     {
-        $date_dif_m = date_diff(date_create($user->created_at), date_create())->i;
+        // $date_dif_m = date_diff(date_create($user->created_at), date_create())->i;
 
         // if ($date_dif_m > 15) {
         //     return response()->json(['question' => Questions::select('id','name')->with('questionsAnswer:id,question_id,answer_id','questionsAnswer.answer:id,name')->find(2)]);
@@ -26,7 +26,7 @@ class QuestionsController extends Controller
         // }
 
         // return response()->json(['question' => Questions::select('id','name')->with('questionsAnswer:id,question_id,answer_id','questionsAnswer.answer:id,name')->find(6)]);
-        
+
         return response()->json(['question' => Questions::select('id','name')->with('questionsAnswer:id,question_id,answer_id','questionsAnswer.answer:id,name')->get()]);
     }
 
