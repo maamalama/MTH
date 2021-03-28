@@ -41,10 +41,10 @@ class UserController extends Controller
         $respone = Http::get('http://a3431-9a0c2.s2.deploy-f.com/api/analysis/getuseranalysis',[
             'comment' => $request->comment
         ])->json();
-        return response()->json([$respone]);
+
         User::find($request->user_id)->update([
             'comment' => $request->comment,
-            'comment_positively' => $respone['result']
+            'comment_positively' => $respone[0]['result']
         ]);
 
         return response()->json([$respone]);
