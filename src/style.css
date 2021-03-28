@@ -1,0 +1,4 @@
+.DeleteAnim {
+    animation: 3s ease-in 1s 2 reverse both paused slide;
+}
+@-keyframes slide { from { background: red } to { background: blue; }  }
