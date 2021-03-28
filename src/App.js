@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group, Cell, Radio, ModalPage, ModalRoot, ModalPageHeader, ScreenSpinner, Header } from '@vkontakte/vkui';
+import { Alert, AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group, Cell, Radio, ModalPage, ModalRoot, ModalPageHeader, ScreenSpinner, Header, SimpleCell, Div, Title } from '@vkontakte/vkui';
 import { io } from "socket.io-client"
 import '@vkontakte/vkui/dist/vkui.css';
 import './css/style.css';
 import vkQr from '@vkontakte/vk-qr';
 import { send } from './server_api';
-
+import "./vivify.css";
 
 
 class App extends Component {
@@ -52,7 +52,7 @@ class App extends Component {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.watchPosition((position) => {
 				console.log(position)
-				send("geo", { user_id: this.state.user_id, coords: position.coords });
+				//send("geo", { user_id: this.state.user_id, coords: position.coords });
 			}, (err) => {
 				this.getGeolcation();
 				this.setPopout(
@@ -113,19 +113,32 @@ class App extends Component {
 					<AppRoot>
 						<Root popout={popout} activeView={activeView} modal={
 							<ModalRoot activeModal={activeModal}>
-								<ModalPage id="questions" header={<ModalPageHeader>Вопрос</ModalPageHeader>} onClose={() => this.setState({ activeModal: null })}>
+								<ModalPage id="questions" header={<ModalPageHeader>Вопрос</ModalPageHeader>} onClose={() => this.setState({ activeModal: null, current_answer_id: null })}>
 									{question &&
 										<div>
-											<Header>{question.name}</Header>
-											
+											<Title style={{ marginLeft: 16, paddingBottom: 8 }} level="2">{question.name}</Title>
 											{
 												question.questions_answer.map((el, index) => {
 													return (
-														<Radio name="answer">{el.answer.name}</Radio>
+														<Radio onChange={() => this.setState({ current_answer_id: el.id })} name="answer">{el.answer.name}</Radio>
 													)
 
 												})
 											}
+
+												<Div>
+													<Button disabled={!this.state.current_answer_id} stretched onClick={() => {
+														send("answer-user", { user_id: this.state.user_id, questions_answer_id: this.state.current_answer_id })
+														this.setActiveModal(null)
+														let dataQuestions = this.state.dataQuestions;
+														let i = dataQuestions.findIndex(i => i.id == question.id);
+														dataQuestions.splice(i, 1);
+														//let q = [].slice.call(document.getElementsByClassName("question"))[i];
+														//this.setState({ dataQuestions, current_answer_id: null });
+														this.setState({ dataQuestions, current_answer_id: null })
+													}} size="l">Ответить</Button>
+												</Div>
+											
 										</div>
 									}
 								</ModalPage>
