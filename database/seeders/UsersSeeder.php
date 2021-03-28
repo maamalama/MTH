@@ -31,7 +31,7 @@ class UsersSeeder extends Seeder
             ]);
         }
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($g = 0; $g < 1000; $g++) {
             switch ((rand(0, 4))) {
                 case 0:
                     $comment = 'Хороший';
@@ -59,7 +59,7 @@ class UsersSeeder extends Seeder
             ]);
         }
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($h = 0; $h < 1000; $h++) {
             switch ((rand(0, 4))) {
                 case 0:
                     $comment = 'Говно';
