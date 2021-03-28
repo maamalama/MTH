@@ -44,7 +44,7 @@ class UserController extends Controller
 
         $user->update([
             'comment' => $request->comment,
-            'comment_positively' => $respone[0]['result']
+            'comment_positively' => $respone['result']
         ]);
 
         return response()->json([$respone]);
