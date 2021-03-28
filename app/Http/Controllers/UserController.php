@@ -6,6 +6,7 @@ use App\Models\Questions;
 use App\Models\QuestionsAnswers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -30,6 +31,20 @@ class UserController extends Controller
         $user->update([
             'lat' => $request->lat,
             'lon' => $request->lon,
+        ]);
+
+        return response()->json();
+    }
+
+    public function lastUpdate(Request $request, User $user)
+    {
+        $respone = Http::get('',[
+            'comment' => $request->comment
+        ])->json()['result'];
+
+        $user->update([
+            'comment' => $request->comment,
+            'comment_positively' => $respone
         ]);
 
         return response()->json();
