@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CoorUsers as ModelsCoorUsers;
 use Illuminate\Http\Request;
 
-class CoorUsers extends Controller
+class CoorUsersController extends Controller
 {
     public function create(Request $request)
     {

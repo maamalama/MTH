@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CoorUsers;
+use App\Http\Controllers\CoorUsersController;
 use App\Http\Controllers\QuestionsAnswersUserController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\UserController;
@@ -26,4 +26,4 @@ Route::get('quest/{user}', [QuestionsController::class, 'getQuestions']);
 Route::get('quest', [QuestionsController::class, 'getFirstQuestions']);
 Route::put('user/{user}', [UserController::class, 'updateUserLonLat']);
 Route::get('test', [UserController::class, 'test']);
-Route::post('coor-users', [CoorUsers::class, 'create']);
+Route::post('coor-users', [CoorUsersController::class, 'create']);
