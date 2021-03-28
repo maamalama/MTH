@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group, Cell, Radio, ModalPage, ModalRoot, ModalPageHeader } from '@vkontakte/vkui';
+import { Alert, AdaptivityProvider, AppRoot, ConfigProvider, PanelHeader, Root, View, Panel, FormLayout, FormLayoutGroup, FormItem, Input, Button, Spinner, CustomSelect, CardGrid, Card, Group, Cell, Radio, ModalPage, ModalRoot, ModalPageHeader, ScreenSpinner, Header } from '@vkontakte/vkui';
 import { io } from "socket.io-client"
 import '@vkontakte/vkui/dist/vkui.css';
 import './css/style.css';
@@ -7,21 +7,14 @@ import vkQr from '@vkontakte/vk-qr';
 import { send } from './server_api';
 
 
-if("serviceWorker" in navigator) {
-    navigator.serviceWorker.register('./service-worker.js')
-	.then((reg) => {
-		console.log("success " + requestAnimationFrame.scope);
-	}).catch((error) => {
-		console.log("Error " + error);
-	});
-}
 
 class App extends Component {
 	state = {
 		popout: null,
 		snackbar: null,
 		answers: null,
-		activePanel: "main",
+		activePanelAdmin: "create_user",
+		activePanelUser: "main",
 		activeView: "user",
 		user_id: null,
 		user: {
@@ -29,24 +22,7 @@ class App extends Component {
 			sex: null,
 			age: null
 		},
-		dataQuestions: [
-			{
-				text: "Как вам выставка?",
-				id: "1",
-				answers: ["ужасно 👎", "нормально 😐", "отлично 👍"]
-			},
-			{
-				text: "Самый любимый экспонат",
-				id: "2",
-				answers: ["никакой", "который план эвакуации", "золотой стул"]
-			},
-			{
-				text: "Придете еще?",
-				id: "3", 
-				answers: ["нет 🤢", "может быть 🤔", "да! 😊"]
-			}
-
-		]
+		dataQuestions: null
 	}
 
 	setActiveModal = (activeModal) => {
@@ -62,7 +38,11 @@ class App extends Component {
 
 		} else {
 			this.setState({ user_id: window.location.hash.split("user")[1] })
-			this.getGeolcation();
+			this.getGeolcation(); 
+			send("quest", {}).then(data => {
+				this.setState({ dataQuestions: [data.question] })
+			})
+			
 		}
 
 
@@ -101,6 +81,7 @@ class App extends Component {
 	}
 
 	createQR = () => {
+		this.setPopout(<ScreenSpinner />)
 		send("user", this.state.user).then(data => {
 			const qrSvg = vkQr.createQR("https://user267319094-r7wx5wi4.wormhole.vk-apps.com/#user" + data.user_id, {
 				qrSize: 256,
@@ -108,7 +89,7 @@ class App extends Component {
 				className: "QR-container__qr-code"
 			});
 			document.querySelector("#QR_container").innerHTML = qrSvg;
-			console.log(data);
+			this.setPopout(null)
 		});
 	}
 
@@ -118,27 +99,29 @@ class App extends Component {
 	}
 
 
-	showQuestion = (answers) => {
+	showQuestion = (question) => {
 		this.setActiveModal("questions");
-		this.setState({ answers })
+		this.setState({ question })
 	}
 
 	
 	render() {
-		const { activePanel, activeView, user, popout, activeModal, answers } = this.state;
+		const { activePanel, activeView, user, popout, activeModal, question, activePanelAdmin, activePanelUser } = this.state;
 		return (
 			<ConfigProvider>
 				<AdaptivityProvider>
 					<AppRoot>
-						<Root activeView={activeView} modal={
+						<Root popout={popout} activeView={activeView} modal={
 							<ModalRoot activeModal={activeModal}>
-								<ModalPage id="questions" header={<ModalPageHeader>Вопросы</ModalPageHeader>} onClose={() => this.setState({ activeModal: null })}>
-									{answers &&
+								<ModalPage id="questions" header={<ModalPageHeader>Вопрос</ModalPageHeader>} onClose={() => this.setState({ activeModal: null })}>
+									{question &&
 										<div>
+											<Header>{question.name}</Header>
+											
 											{
-												answers.map((el, index) => {
+												question.questions_answer.map((el, index) => {
 													return (
-														<Radio name="answer">{el}</Radio>
+														<Radio name="answer">{el.answer.name}</Radio>
 													)
 
 												})
@@ -148,7 +131,7 @@ class App extends Component {
 								</ModalPage>
 							</ModalRoot>
 						}>
-							<View activePanel={activePanel} id="admin">
+							<View activePanel={activePanelAdmin} id="admin">
 								<Panel id="create_user">
 									<PanelHeader>
 										Админ
@@ -156,7 +139,7 @@ class App extends Component {
 									<FormLayout>
 										<FormLayoutGroup>
 											<FormItem top="ФИО">
-												<Input name="name" onChange={this.onChange} value={user.name} type="text" required />
+												<Input name="name" onChange={this.onChange} value={user.name} type="text" />
 
 											</FormItem>
 											<FormItem top="Пол">
@@ -185,12 +168,12 @@ class App extends Component {
 									<Group>
 										<CardGrid size="l">
 											{
-												this.state.dataQuestions.map((el, index) => {
+												this.state.dataQuestions && this.state.dataQuestions.map((el, index) => {
 													return (
-														<Card id={el.id} onClick={() => this.showQuestion(el.answers)} className="question">
+														<Card id={el.id} onClick={() => this.showQuestion(el)} className="question">
 															<div className="question__content">
 																<span className="question__content-index">{`${index + 1} `}</span>
-																<div class="question__content-text">{el.text}</div>
+																<div className="question__content-text">{el.name}</div>
 															</div>
 														</Card>
 													);
