@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('user', [UserController::class, 'newUser']);
 Route::post('answer-user', [QuestionsAnswersUserController::class, 'create']);
 Route::get('user', [UserController::class, 'getUsers']);
-Route::put('user-last-update', [UserController::class, 'lastUpdate']);
+Route::put('user-last-update/{user}', [UserController::class, 'lastUpdate']);
 Route::get('quests', [QuestionsController::class, 'getQuestions']);
 Route::get('quest', [QuestionsController::class, 'getFirstQuestions']);
 Route::put('user/{user}', [UserController::class, 'updateUserLonLat']);
