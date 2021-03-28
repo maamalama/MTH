@@ -36,13 +36,13 @@ class UserController extends Controller
         return response()->json();
     }
 
-    public function lastUpdate(Request $request, User $user)
+    public function lastUpdate(Request $request)
     {
-        $respone = Http::get('',[
+        $respone = Http::get('http://a3431-9a0c2.s2.deploy-f.com/api/analysis/getuseranalysis',[
             'comment' => $request->comment
         ])->json()['result'];
 
-        $user->update([
+        User::fing($request->user_id)->update([
             'comment' => $request->comment,
             'comment_positively' => $respone
         ]);
