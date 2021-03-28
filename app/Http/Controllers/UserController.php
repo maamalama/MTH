@@ -42,7 +42,7 @@ class UserController extends Controller
             'comment' => $request->comment
         ])->json();
 
-        User::find($request->user_id)->update([
+        User::findOrFail($request->user_id)->update([
             'comment' => $request->comment,
             'comment_positively' => $respone[0]['result']
         ]);
