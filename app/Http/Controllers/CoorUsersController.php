@@ -22,6 +22,6 @@ class CoorUsersController extends Controller
 
     public function getCoorUsers(User $user)
     {
-        return response()->json(['coors' => ModelsCoorUsers::where('number', '!=', null)->where('user_id', $user->id)->get()]);
+        return response()->json(['coors' => ModelsCoorUsers::where('number', '!=', null)->where('user_id', $user->id)->select('id','number')->get()]);
     }
 }
