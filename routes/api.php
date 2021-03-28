@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoorUsers;
+use App\Http\Controllers\QuestionsAnswersUserController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
