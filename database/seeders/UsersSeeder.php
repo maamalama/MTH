@@ -24,42 +24,42 @@ class UsersSeeder extends Seeder
 
         $count_date = count($full_date) - 1;
 
-        for ($i = 0; $i < 1000; $i++) {
-            User::factory(1)->create([
-                'comment' => $full_date[rand(0, $count_date)],
-                'comment_positively' => (int) $full_date2[rand(0, $count_date)]
-            ]);
-        }
+        // for ($i = 0; $i < 1000; $i++) {
+        //     User::factory(1)->create([
+        //         'comment' => $full_date[rand(0, $count_date)],
+        //         'comment_positively' => (int) $full_date2[rand(0, $count_date)]
+        //     ]);
+        // }
 
-        for ($g = 0; $g < 1000; $g++) {
-            switch ((rand(0, 4))) {
-                case 0:
-                    $comment = 'Хороший';
-                    break;
-                case 1:
-                    $comment = 'Хорошо';
-                    break;
-                case 2:
-                    $comment = 'Понравилось';
-                    break;
-                case 3:
-                    $comment = 'Интересно';
-                    break;
-                case 4:
-                    $comment = 'Классно';
-                    break;
+        // for ($g = 0; $g < 1000; $g++) {
+        //     switch ((rand(0, 4))) {
+        //         case 0:
+        //             $comment = 'Хороший';
+        //             break;
+        //         case 1:
+        //             $comment = 'Хорошо';
+        //             break;
+        //         case 2:
+        //             $comment = 'Понравилось';
+        //             break;
+        //         case 3:
+        //             $comment = 'Интересно';
+        //             break;
+        //         case 4:
+        //             $comment = 'Классно';
+        //             break;
 
-                default:
-                    # code...
-                    break;
-            }
-            User::factory(1)->create([
-                'comment' => $comment,
-                'comment_positively' => 0
-            ]);
-        }
+        //         default:
+        //             # code...
+        //             break;
+        //     }
+        //     User::factory(1)->create([
+        //         'comment' => $comment,
+        //         'comment_positively' => 0
+        //     ]);
+        // }
 
-        for ($h = 0; $h < 1000; $h++) {
+        for ($h = 0; $h < 5; $h++) {
             switch ((rand(0, 4))) {
                 case 0:
                     $comment = 'Говно';
