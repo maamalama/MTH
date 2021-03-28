@@ -27,3 +27,4 @@ Route::get('quest', [QuestionsController::class, 'getFirstQuestions']);
 Route::put('user/{user}', [UserController::class, 'updateUserLonLat']);
 Route::get('test', [UserController::class, 'test']);
 Route::post('coor-users', [CoorUsersController::class, 'create']);
+Route::get('coor-users/{user}', [CoorUsersController::class, 'getCoorUsers']);
