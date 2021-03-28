@@ -15,6 +15,6 @@ class QuestionsAnswersUserController extends Controller
             'questions_answer_id' => $request->questions_answer_id,
         ]);
 
-        return response()->json();
+        return response()->json([$request->user_id, $request->questions_answer_id]);
     }
 }
