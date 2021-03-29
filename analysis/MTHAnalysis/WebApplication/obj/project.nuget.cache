@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "txNpHAHj8YHd8lOtBpDyN4bPczTUEvjUqUCTtLWznAP5A/2/fzE36UBylMv2mOCk/olTrIrDyEO5uduD0yn4ow==",
+  "success": true,
+  "projectFilePath": "D:\\MTH\\analysis\\MTHAnalysis\\WebApplication\\WebApplication.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\aspnetmonsters.blazor.geolocation\\0.5.0-preview1\\aspnetmonsters.blazor.geolocation.0.5.0-preview1.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.0.0-rc1.19457.4\\microsoft.aspnetcore.authorization.3.0.0-rc1.19457.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components\\3.0.0-rc1.19457.4\\microsoft.aspnetcore.components.3.0.0-rc1.19457.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\3.0.0-rc1.19457.4\\microsoft.aspnetcore.components.analyzers.3.0.0-rc1.19457.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\3.0.0-rc1.19457.4\\microsoft.aspnetcore.components.forms.3.0.0-rc1.19457.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.web\\3.0.0-rc1.19457.4\\microsoft.aspnetcore.components.web.3.0.0-rc1.19457.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.metadata\\3.0.0-rc1.19457.4\\microsoft.aspnetcore.metadata.3.0.0-rc1.19457.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.0.0-rc1.19456.10\\microsoft.extensions.dependencyinjection.3.0.0-rc1.19456.10.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.0.0-rc1.19456.10\\microsoft.extensions.dependencyinjection.abstractions.3.0.0-rc1.19456.10.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.0-rc1.19456.10\\microsoft.extensions.logging.abstractions.3.0.0-rc1.19456.10.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.options\\3.0.0-rc1.19456.10\\microsoft.extensions.options.3.0.0-rc1.19456.10.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.primitives\\3.0.0-rc1.19456.10\\microsoft.extensions.primitives.3.0.0-rc1.19456.10.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.jsinterop\\3.0.0-rc1.19456.10\\microsoft.jsinterop.3.0.0-rc1.19456.10.nupkg.sha512"
+  ],
+  "logs": []
+}

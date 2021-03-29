@@ -16,5 +16,12 @@ namespace HackAnalysis.Data
         public string date_birth { get; set; }
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
+        
+        public int _year => int.Parse(created_at.Year.ToString());
+        public int _month => int.Parse(created_at.Month.ToString());
+        
+        public int Year { get; set; }
+        public int Month { get; set; }
+        
     }
 }

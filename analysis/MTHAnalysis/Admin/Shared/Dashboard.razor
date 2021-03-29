@@ -1,0 +1,176 @@
+@page "/"
+@using Admin.Data
+@using Newtonsoft.Json
+@using System.Text
+@inject HttpClient HttpClient;
+@inject IJSRuntime JSRuntime
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4"></MudText>
+<MudButton Variant="Variant.Filled" Style="background-color: #4AB34C" Link="https://a3431-9a0c2.s2.deploy-f.com/api/analysis/getuserreport">Экспорт в CSV</MudButton>
+<MudGrid>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Filled.Euro" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Всего посетителей</MudText>
+                <MudText Typo="Typo.h5">@(UsersCount)</MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Filled.Layers" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Последний пользователь</MudText>
+                <MudText Typo="Typo.h5">
+
+                    @A
+                </MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Filled.Public" Color="Color.Success" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Женщин</MudText>
+                <MudText Typo="Typo.h5">
+                    @B
+                </MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Custom.Uncategorized.Radioactive" Color="Color.Warning" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Мужчин</MudText>
+                <MudText Typo="Typo.h5">
+                    @C
+                </MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Filled.Apps" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Негативных</MudText>
+                <MudText Typo="Typo.h5">@(D)</MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Filled.Block" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Положительных</MudText>
+                <MudText Typo="Typo.h5">@(F)</MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="8">
+        <MudPaper Class="pa-4">
+            <MudChart ChartType="ChartType.Pie" InputData="@data" InputLabels="@labels" Width="300px" Height="300px"/>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="8">
+        <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" XAxisLabels="@XAxisLabels" Width="100%" Height="350px"></MudChart>
+    </MudItem>
+
+
+</MudGrid>
+
+@code {
+
+
+    Users users;
+    int UsersCount = 0;
+    DateTime? A;
+    int B = 0;
+    int C = 0;
+    int D = 0;
+    int F = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await GetUsers();
+        UsersCount = users.users.Count();
+        A = users.users.OrderByDescending(x => x.created_at).FirstOrDefault().created_at;
+        B = users.users.Where(x => x.sex == "женский").Count();
+        C = users.users.Where(x => x.sex == "мужской").Count();
+        D = users.users.Where(x => x.comment_positively == 1).ToList().Count;
+        F = users.users.Where(x => x.comment_positively == 0).ToList().Count;
+    }
+
+    private async Task<Users> GetUsers()
+    {
+        var user = new Dat {type = "user2"};
+        string json = JsonConvert.SerializeObject(user);
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+
+    /*HttpResponseMessage response = await HttpClient.GetAsync("https://81.177.165.209:3000/user");
+        response.EnsureSuccessStatusCode();
+        var settings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            MissingMemberHandling = MissingMemberHandling.Ignore
+        };
+        string responseBody = await response.Content.ReadAsStringAsync();*/
+
+        var usersS = await HttpClient.GetStringAsync("users.json");
+        var users = JsonConvert.DeserializeObject<Users>(usersS);
+        return users;
+    }
+
+    int dataSize = 4;
+    double[] data = {77, 25, 20, 5};
+    string[] labels = {"22-30", "16-18", "30-40", "50+",};
+
+    Random random = new Random();
+
+    void RandomizeData()
+    {
+        var new_data = new double[dataSize];
+        for (int i = 0; i < new_data.Length; i++)
+            new_data[i] = random.NextDouble() * 100;
+        data = new_data;
+        StateHasChanged();
+    }
+
+    void AddDataSize()
+    {
+        if (dataSize < 20)
+        {
+            dataSize = dataSize + 1;
+            RandomizeData();
+        }
+    }
+
+    void RemoveDataSize()
+    {
+        if (dataSize > 0)
+        {
+            dataSize = dataSize - 1;
+            RandomizeData();
+        }
+    }
+
+    public List<ChartSeries> Series = new List<ChartSeries>()
+    {
+        new ChartSeries() {Name = "Женщины", Data = new double[] {40, 20, 25, 27, 46, 60, 48, 80, 15}},
+        new ChartSeries() {Name = "Мужчины", Data = new double[] {19, 24, 35, 13, 28, 15, 13, 16, 31}},
+        new ChartSeries() {Name = "Другое", Data = new double[] {8, 6, 11, 13, 4, 16, 10, 16, 18}},
+    };
+
+    public string[] XAxisLabels = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"};
+
+    public int IsDownloadStarted { get; set; } = 0;
+    protected async Task DownloadFile()
+    {
+        
+    }
+
+}

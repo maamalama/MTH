@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackAnalysis", "HackAnalysis\HackAnalysis.csproj", "{6AF750F0-CA2F-41F2-9DF3-24BEDE0142C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj", "{2CE3E12F-4B97-4AE4-9DFB-8ECF677B7E6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{EB594C4C-21E6-45B9-B88F-97943CAC0D4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6AF750F0-CA2F-41F2-9DF3-24BEDE0142C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AF750F0-CA2F-41F2-9DF3-24BEDE0142C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AF750F0-CA2F-41F2-9DF3-24BEDE0142C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE3E12F-4B97-4AE4-9DFB-8ECF677B7E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE3E12F-4B97-4AE4-9DFB-8ECF677B7E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE3E12F-4B97-4AE4-9DFB-8ECF677B7E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE3E12F-4B97-4AE4-9DFB-8ECF677B7E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB594C4C-21E6-45B9-B88F-97943CAC0D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB594C4C-21E6-45B9-B88F-97943CAC0D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB594C4C-21E6-45B9-B88F-97943CAC0D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB594C4C-21E6-45B9-B88F-97943CAC0D4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

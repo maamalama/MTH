@@ -83,3 +83,15 @@ D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\win\lib\netco
 D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\Syncfusion.Compression.Portable.dll
 D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\Syncfusion.Licensing.dll
 D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\Syncfusion.XlsIO.Portable.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\Microsoft.ML.Mkl.Redist.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\Microsoft.ML.TimeSeries.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\linux-x64\native\libMklImports.so
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\linux-x64\native\libMklProxyNative.so
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\osx-x64\native\libMklImports.dylib
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\osx-x64\native\libMklProxyNative.dylib
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\win-x64\native\MklImports.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\win-x64\native\MklProxyNative.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\win-x64\native\libiomp5md.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\win-x86\native\MklImports.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\win-x86\native\MklProxyNative.dll
+D:\MTH\analysis\MTHAnalysis\HackAnalysis\bin\Debug\net5.0\runtimes\win-x86\native\libiomp5md.dll
