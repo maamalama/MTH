@@ -1,0 +1,30 @@
+{
+  "name": "putincoinserver",
+  "version": "1.0.0",
+  "description": "server",
+  "main": "./src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
+    "crypto": "^1.0.1",
+    "easyvk": "^2.8.2",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "querystring": "^0.2.1",
+    "sequelize": "^6.5.1",
+    "socket.io": "^4.0.0",
+    "webpack": "^5.24.4",
+    "websocket": "^1.0.33",
+    "ws": "^7.4.4"
+  }
+}
